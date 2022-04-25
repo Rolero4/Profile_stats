@@ -1,0 +1,126 @@
+﻿<Window x:Class="Profile_stats.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:vm="clr-namespace:Profile_stats.ViewModel"
+        mc:Ignorable="d"
+        Title="StatApp" Height="650" Width="1100"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+
+    <Window.Background>
+        <LinearGradientBrush  StartPoint="0.5,0.9" EndPoint="0.7,0.2"  >
+            <GradientStop Color="DarkOliveGreen" />
+            <GradientStop Color="OliveDrab" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.DataContext>
+        <vm:PlayersViewModel x:Name="MainViewModel"/>
+    </Window.DataContext>
+
+
+
+    <Window.Resources>
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontFamily" Value="Gwent"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="combobox" TargetType="ComboBox">
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontFamily" Value="Gwent"/>
+            <Setter Property="Width" Value="540"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+
+        </Style>
+
+        <Style x:Key="TextBlock" TargetType="TextBlock">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontFamily" Value="Gwent"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="text_box">
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="350"/>
+            <Setter Property="FontFamily" Value="Gwent"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition Width="0.05*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!--Player-->
+        <Button x:Name="Add_Player" Grid.Row="1" Grid.Column="2"  
+                Content="Add Player" 
+                Style="{StaticResource button}"/>
+
+        <ComboBox x:Name="Combo_players" Grid.Row="1" Grid.Column="1"  
+                  Style="{StaticResource combobox}"
+                  ItemsSource="{Binding Players}"
+                  SelectedItem="{Binding Profile}">
+
+        </ComboBox>
+
+        <TextBox x:Name="Player_input" Grid.Row="2" Grid.Column="2"
+                 Visibility="Hidden" 
+                 Style="{StaticResource text_box}"/>
+
+        <!--Log-->
+        <Button x:Name="Add_Log" Grid.Row="2" Grid.Column="2"  
+                Content="Add Log" IsEnabled="False"
+                Style="{StaticResource button}"/>
+
+        <ComboBox x:Name="Combo_logs" Grid.Row="2" Grid.Column="1" 
+                  IsEnabled="False"
+                  Style="{StaticResource combobox}"/>
+
+        <TextBox/>
+
+        <TextBlock x:Name="Text_block" Grid.Row="3" Grid.Column="1"
+                    Grid.ColumnSpan="2" Style="{StaticResource TextBlock}"
+                    Text="{Binding InfoText}"/>
+
+
+    </Grid>
+</Window>
